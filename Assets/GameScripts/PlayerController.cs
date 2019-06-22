@@ -29,6 +29,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void KnockBack()
+    {
+        rb.velocity = Vector3.zero;
+        rb.AddForce(-transform.forward * 1000.0f);
+    }
     void MoveForward()
     {
         rb.MovePosition(transform.position+(transform.forward * carSpeed * Time.deltaTime));
@@ -42,7 +47,10 @@ public class PlayerController : MonoBehaviour
         Physics.Raycast(camDir, out hit);
         direction = (hit.point - transform.position).normalized * carSpeed * Time.deltaTime;
 
-        transform.forward = direction;
+        //transform.forward += direction;
+        transform.forward += new Vector3(Mathf.Lerp(transform.position.x, direction.x, 1.2f),
+                                        0,
+                                        Mathf.Lerp(transform.position.z, direction.z, 1.2f));
 
         rb.MovePosition(transform.position + direction);
 
