@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     Vector3 direction;
     Rigidbody rb;
+    [SerializeField]
     Camera cam;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        cam = GetComponentInChildren<Camera>();
+       
         
     }
     
@@ -30,7 +31,8 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        //rb.velocity = transform.forward * carSpeed * Time.deltaTime;
+        rb.MovePosition(transform.position+(transform.forward * carSpeed * Time.deltaTime));
+        cam.transform.position =  new Vector3(transform.position.x, transform.position.y + 10.0f, transform.position.z - 7.0f);
     }
 
     void Move()
@@ -39,13 +41,11 @@ public class PlayerController : MonoBehaviour
         Ray camDir = cam.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(camDir, out hit);
         direction = (hit.point - transform.position).normalized * carSpeed * Time.deltaTime;
-        //direction = (new Vector3((Input.mousePosition.x - cam.WorldToScreenPoint(transform.position).x),
-        //                                0,
-        //                                (Input.mousePosition.y - cam.WorldToScreenPoint(transform.position).y))) * carSpeed * Time.deltaTime;
 
-       // direction = direction - transform.forward * carSpeed * Time.deltaTime;
-        //rb.AddForce(direction, ForceMode.Force);
-        rb.MovePosition(direction);
+        transform.forward = direction;
+
+        rb.MovePosition(transform.position + direction);
+
         transform.rotation.SetLookRotation(direction.normalized, Vector3.up);
     }
 }
