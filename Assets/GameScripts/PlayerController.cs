@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void MoveForward()
     {
-        rb.velocity = transform.forward * carSpeed * Time.deltaTime;
+        //rb.velocity = transform.forward * carSpeed * Time.deltaTime;
     }
 
     void Move()
