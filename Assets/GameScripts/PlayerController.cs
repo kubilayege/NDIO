@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            KnockBack();
+        }
     }
 
     void KnockBack()
