@@ -6,10 +6,12 @@ public class botCar : MonoBehaviour
 {
     GameController gc;
     GameObject target;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        GameController gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,12 @@ public class botCar : MonoBehaviour
     {
         int id = GetBotID(this.name);
         target = FindClosest(id);
+
+        rb.MovePosition(transform.position + ( ( target.transform.position - transform.position).normalized * 10.0f * Time.deltaTime) );
+
+        transform.forward += new Vector3(Mathf.Lerp(transform.position.x, target.transform.position.x, 1.2f),
+                                        0,
+                                        Mathf.Lerp(transform.position.z, target.transform.position.z, 1.2f));
     }
     GameObject FindClosest(int thisID)
     {

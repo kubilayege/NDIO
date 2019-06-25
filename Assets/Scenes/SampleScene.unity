@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 706823187}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,19 +292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab14bd5dd191a2439863bb852acc2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 9163663252292211920, guid: 3045aa7b6f34cdb4e97dffe251b5645b,
-    type: 3}
   bots:
   - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
-  - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
+  player: {fileID: 0}
+  playerPrefab: {fileID: 9163663252292211920, guid: 3045aa7b6f34cdb4e97dffe251b5645b,
+    type: 3}
   carModels:
   - {fileID: 261943132681320116, guid: ce5842b67d3877242af75a6ccb4b854b, type: 3}
   - {fileID: 7720703220109032931, guid: cebc41507ef9e3d449b60dfdc2fc5fce, type: 3}
@@ -315,7 +307,7 @@ MonoBehaviour:
   - {fileID: 3779511710734713662, guid: 9a73a844bbfc84c4ca3edd706303f9d7, type: 3}
   - {fileID: 6363778693659457807, guid: 2ee268e0df09fc54c9be43314aba2243, type: 3}
   - {fileID: 2096333210466334907, guid: bc17c8f25f299184dbb0946fba127abf, type: 3}
-  numberOfBots: 8
+  numberOfBots: 1
   chosenCar: 1
 --- !u!4 &706823188
 Transform:

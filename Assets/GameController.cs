@@ -56,9 +56,9 @@ public class GameController : MonoBehaviour
     Vector3 getRandPos(int i)
     {
         UnityEngine.Random.seed = DateTime.UtcNow.Millisecond;
-        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-10.0f - i*4, 10.0f + i*4),
+        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-i*5, i*5),
                                           1f,
-                                          UnityEngine.Random.Range(-10.0f - i*4, 10.0f + i*4)); 
+                                          UnityEngine.Random.Range(-i*5, i*5)); 
 
         return randomPlace;
     }
