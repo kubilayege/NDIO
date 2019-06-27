@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     Camera cam;
-
+    float knockbackcoff = 1000.0f;
+    int score;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,17 +28,8 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            KnockBack();
-        }
     }
 
-    void KnockBack()
-    {
-        rb.velocity = Vector3.zero;
-        rb.AddForce(-transform.forward * 1000.0f);
-    }
     void MoveForward()
     {
         rb.MovePosition(transform.position+(transform.forward * carSpeed * Time.deltaTime));
@@ -60,4 +52,31 @@ public class PlayerController : MonoBehaviour
 
         //transform.rotation.SetLookRotation(direction.normalized, Vector3.up);
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Shield")
+        {
+            KnockBack();
+        }
+
+        if (other.gameObject.tag == "Car")
+        {
+            Destroy(other.gameObject.transform.parent.gameObject);
+            KillSomeone();
+        }
+
+
+    }
+
+    void KnockBack()
+    {
+        rb.velocity = Vector3.zero;
+        rb.AddForce(-transform.forward * knockbackcoff);
+    }
+
+    void KillSomeone()
+    {
+        score += 1;
+    }
+
 }

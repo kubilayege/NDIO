@@ -4477,7 +4477,7 @@ ParticleSystem:
 --- !u!199 &2888220586495162599
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4631,7 +4631,7 @@ GameObject:
   - component: {fileID: 3043158019471784073}
   m_Layer: 0
   m_Name: Sedan
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
