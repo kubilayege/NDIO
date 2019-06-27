@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         
     }
     
@@ -58,6 +58,6 @@ public class PlayerController : MonoBehaviour
 
         rb.MovePosition(transform.position + direction);
 
-        transform.rotation.SetLookRotation(direction.normalized, Vector3.up);
+        //transform.rotation.SetLookRotation(direction.normalized, Vector3.up);
     }
 }
