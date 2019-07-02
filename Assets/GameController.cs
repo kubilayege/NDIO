@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     int offSet = 50;
     int tempOffset = 10;
 
-    void Start()
+    void Awake()
     {
         SpawnPlayer();
         SpawnBots();

@@ -17,8 +17,8 @@ public class botCar : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         rb = GetComponent<Rigidbody>();
 
-        scaler = GameObject.Find("Bot1/Shield(Clone)");
-        scaler2 = GameObject.Find("Bot1/Shield2(Clone)");
+        scaler = transform.GetChild(1).gameObject;
+        scaler2 = transform.GetChild(2).gameObject;
     }
 
     void Update()
