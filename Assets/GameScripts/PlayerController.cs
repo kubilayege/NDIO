@@ -12,19 +12,23 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     Camera cam;
+    GameObject scaler;
+    GameObject scaler2;
     float knockbackcoff = 1000.0f;
     int score;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        
+        scaler = GameObject.Find("Player(Clone)/Shield(Clone)");
+        scaler2 = GameObject.Find("Player(Clone)/Shield2(Clone)");
     }
-    
+
     void Update()
     {
         MoveForward();
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && transform.position.y < 0.2)
         {
             Move();
         }
@@ -34,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.MovePosition(transform.position+(transform.forward * carSpeed * Time.deltaTime));
         cam.transform.position =  new Vector3(transform.position.x, transform.position.y + 10.0f, transform.position.z - 7.0f);
+
     }
 
     void Move()
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Ray camDir = cam.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(camDir, out hit);
+
         direction = (hit.point - transform.position).normalized * carSpeed * Time.deltaTime;
 
         //transform.forward += direction;
@@ -64,8 +70,6 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject.transform.parent.gameObject);
             KillSomeone();
         }
-
-
     }
 
     void KnockBack()
@@ -77,6 +81,9 @@ public class PlayerController : MonoBehaviour
     void KillSomeone()
     {
         score += 1;
+        scaler.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
+        scaler2.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
+
     }
 
 }

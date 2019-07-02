@@ -5,15 +5,20 @@ public class botCar : MonoBehaviour
     GameController gc;
     GameObject target;
     Rigidbody rb;
-
+    GameObject scaler;
+    GameObject scaler2;
     Vector3 direction; //yön bilgisi
 
     public int score;
     public float knockbackcoff = 1000.0f;
+
     void Start()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         rb = GetComponent<Rigidbody>();
+
+        scaler = transform.GetChild(1).gameObject;
+        scaler2 = transform.GetChild(2).gameObject;
     }
 
     void Update()
@@ -33,6 +38,7 @@ public class botCar : MonoBehaviour
                                         Mathf.Lerp(transform.position.z, direction.z, 1.2f));
 
         rb.MovePosition(transform.position + direction);
+
     }
     GameObject FindClosest(int thisID)
     {
@@ -44,7 +50,7 @@ public class botCar : MonoBehaviour
         for (int i = 0; i < gc.bots.Length; i++)
         {
             if (i == thisID) { continue; }
-            distance = (gc.bots[i].transform.position - gc.bots[thisID].transform.position).magnitude;
+            try { distance = (gc.bots[i].transform.position - gc.bots[thisID].transform.position).magnitude; } catch { }
             if (distance > maxdistance) { maxdistance = distance; closest = gc.bots[i].gameObject; }
         }
 
@@ -57,7 +63,7 @@ public class botCar : MonoBehaviour
     {
         for (int i = 0; i < gc.bots.Length; i++)
         {
-            if (gc.bots[i].name == name) return i;
+            try { if (gc.bots[i].name == name) return i; } catch { }
         }
         return -1;
     }
@@ -82,9 +88,10 @@ public class botCar : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.AddForce(-transform.forward * knockbackcoff);
     }
-
     void KillSomeone()
     {
         score += 1;
+        scaler.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
+        scaler2.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
     }
 }

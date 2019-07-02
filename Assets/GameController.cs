@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     int offSet = 50;
     int tempOffset = 10;
 
-    void Start()
+    void Awake()
     {
         SpawnPlayer();
         SpawnBots();
@@ -42,13 +42,13 @@ public class GameController : MonoBehaviour
 
         playerCar = spawnObj(shield, new Vector3(player.transform.position.x,
                                                 player.transform.position.y + 0.3f,
-                                                player.transform.position.z + 1.25f), Quaternion.identity);
+                                                player.transform.position.z + 1.3f), Quaternion.identity);
         playerCar.transform.parent = player.transform;
 
 
         playerCar = spawnObj(shield2, new Vector3(player.transform.position.x,
                                                player.transform.position.y + 0.3f,
-                                               player.transform.position.z + 1.25f), Quaternion.identity);
+                                               player.transform.position.z + 1.3f), Quaternion.identity);
         playerCar.transform.parent = player.transform;
 
     }
@@ -61,15 +61,15 @@ public class GameController : MonoBehaviour
             GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
 
-            //arabanın önüne banner spawn eder
+            //arabanın önüne shield spawn eder
             botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
                                                   bots[i].transform.position.y + 0.3f,
-                                                  bots[i].transform.position.z + 1.25f), Quaternion.identity);
+                                                  bots[i].transform.position.z + 1.3f), Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
 
             botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
                                                   bots[i].transform.position.y + 0.3f,
-                                                  bots[i].transform.position.z + 1.25f), Quaternion.identity);
+                                                  bots[i].transform.position.z + 1.3f), Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
 
             bots[i].transform.forward = getRandPos(i + 1);
