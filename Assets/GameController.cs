@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
+using System.Collections.Generic;
+
 public class GameController : MonoBehaviour
 {
     public GameObject[] carModels;
@@ -11,14 +14,14 @@ public class GameController : MonoBehaviour
     public GameObject shield;
     public GameObject shield2;
 
-    public int[] scoreBoard;
     public int numberOfBots;
     public int chosenCar = 0;
 
-    int tempScore;
-    int tempKillScore;
     int offSet = 50;
     int tempOffset = 10;
+
+    [SerializeField]
+    public SortedDictionary<string, int> scores;
 
     void Awake()
     {
@@ -26,16 +29,17 @@ public class GameController : MonoBehaviour
         SpawnBots();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        CalculateHighScore();
+
     }
 
     void SpawnPlayer()
     {
         //player spawn
         player = spawnObj(playerPrefab, getRandPos(1), Quaternion.identity);
+        player.name = "player";
+        SetScore(player.name, 0);
 
         GameObject playerCar = spawnObj(carModels[chosenCar], player.transform.position, Quaternion.identity);
         playerCar.transform.parent = player.transform;
@@ -52,6 +56,7 @@ public class GameController : MonoBehaviour
         playerCar.transform.parent = player.transform;
 
     }
+
     void SpawnBots()
     {
         //bots spawn
@@ -71,11 +76,13 @@ public class GameController : MonoBehaviour
                                                   bots[i].transform.position.y + 0.3f,
                                                   bots[i].transform.position.z + 1.3f), Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
-
+            
             bots[i].transform.forward = getRandPos(i + 1);
             bots[i].name = "Bot" + (i + 1).ToString();
+            SetScore(bots[i].name, 0);
         }
     }
+
     Vector3 getRandPos(int i)
     {
         //UnityEngine.Random.seed = DateTime.UtcNow.Millisecond;
@@ -92,32 +99,51 @@ public class GameController : MonoBehaviour
         return (GameObject)GameObject.Instantiate(obj, pos, quaternion);
     }
 
-    //TODO kimin score'u arttıysa ona aktarılacak
-    void GetKill(int score)
+    void InitScores()
     {
-        tempKillScore = score;
+        if (scores != null)
+            return;
+
+        scores = new SortedDictionary<string, int>();
+    }
+    
+    public void SetScore(string name, int value)
+    {
+        InitScores();
+        if (scores.ContainsKey(name) == false)
+        {
+            scores.Add(name, value);
+        }
+        
+        scores[name] = value;
     }
 
-    //TODO isimler eklenecek.
-    void CalculateHighScore()
+    public int GetScore(string name)
     {
-        for (int i = 0; i < numberOfBots + 1; i++)
-        {
-            if (scoreBoard[i] < scoreBoard[i + 1])
-            {
-                tempScore = scoreBoard[i + 1];
-                scoreBoard[i + 1] = scoreBoard[i];
-                scoreBoard[i] = tempScore;
-            }
-        }
+        InitScores();
+
+        if (scores.ContainsKey(name) == false)
+            return 0;
+
+        return scores[name];
+    }
+
+    public void UpdateScore(string name, int amount)  
+    {
+        InitScores();
+
+        int currentScore = scores[name];
+        SetScore(name, currentScore + amount);
     }
 
     private void OnGUI()
     {
+        var scoreBoard = scores.OrderByDescending(x => x.Value);
+
         GUI.skin.label.fontSize = 40;
-        for (int i = 0; i < numberOfBots + 1; i++)
+        foreach( KeyValuePair<string, int> kvp in scoreBoard)
         {
-            GUI.Label(new Rect(Screen.width - 70, Screen.height - Screen.height + tempOffset, Screen.width, Screen.height), scoreBoard[i].ToString());
+            GUI.Label(new Rect(Screen.width - 250, Screen.height - Screen.height + tempOffset, Screen.width, Screen.height), kvp.Key + " " + kvp.Value);
             tempOffset += offSet;
         }
         tempOffset = 10;

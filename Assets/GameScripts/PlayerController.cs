@@ -12,17 +12,21 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     Camera cam;
+    GameController gc;
+    [SerializeField]
     GameObject scaler;
+    [SerializeField]
     GameObject scaler2;
     float knockbackcoff = 1000.0f;
     int score;
 
     void Start()
     {
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        scaler = GameObject.Find("Player(Clone)/Shield(Clone)");
-        scaler2 = GameObject.Find("Player(Clone)/Shield2(Clone)");
+        scaler = transform.GetChild(1).gameObject;
+        scaler2 = transform.GetChild(2).gameObject;
     }
     
     void Update()
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
         //transform.rotation.SetLookRotation(direction.normalized, Vector3.up);
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Shield")
@@ -67,8 +72,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Car")
         {
+            KillSomeone(other.gameObject.transform.parent.gameObject);
             Destroy(other.gameObject.transform.parent.gameObject);
-            KillSomeone();
         }
     }
 
@@ -78,12 +83,12 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(-transform.forward * knockbackcoff);
     }
 
-    void KillSomeone()
+    void KillSomeone(GameObject other)
     {
-        score += 1;
-        scaler.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
-        scaler2.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
+        gc.UpdateScore(this.name, gc.GetScore(other.name) + 10);
+        gc.scores[other.name] = 0;
+        scaler.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(1).localScale.x, 0, 0);
+        scaler2.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(2).localScale.x, 0, 0);
 
     }
-
 }
