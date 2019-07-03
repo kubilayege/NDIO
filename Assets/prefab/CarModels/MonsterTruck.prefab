@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2190308996240878319}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelBL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2190296198275055799}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelFL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 2190264937601176311}
   - component: {fileID: 2169800184332721899}
   - component: {fileID: 2179310827715314013}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Chasis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,6 +120,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -136,6 +137,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -158,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2196184409689286697}
   - component: {fileID: 2198324446581455247}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MonsterTruck
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -204,7 +206,7 @@ GameObject:
   - component: {fileID: 2196544944761082999}
   - component: {fileID: 2170037816135162965}
   - component: {fileID: 2178341594254053279}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,6 +249,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -259,6 +262,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -282,7 +286,7 @@ GameObject:
   - component: {fileID: 2190432296427019301}
   - component: {fileID: 2170537256639001427}
   - component: {fileID: 2179403310928627349}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,6 +329,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -337,6 +342,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -358,7 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2189885960827268653}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +397,7 @@ GameObject:
   - component: {fileID: 2190239682105160345}
   - component: {fileID: 2169753533850501395}
   - component: {fileID: 2179399083085240829}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,6 +440,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -446,6 +453,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -467,7 +475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2190228036460586215}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2196517068647863001}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelFR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +539,7 @@ GameObject:
   - component: {fileID: 2190073992063434667}
   - component: {fileID: 2170478823156473377}
   - component: {fileID: 2178046537791645415}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,6 +582,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -586,6 +595,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

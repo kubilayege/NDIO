@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3081039551122984875}
   - component: {fileID: 2887688700506202143}
   - component: {fileID: 2888220586495162599}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1216,6 +1216,7 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
+    serializedVersion: 2
     enabled: 0
     mode: 0
     timeMode: 0
@@ -1333,7 +1334,7 @@ ParticleSystem:
     rowIndex: 0
     cycles: 1
     uvChannelMask: -1
-    randomRow: 1
+    rowMode: 1
     sprites:
     - sprite: {fileID: 0}
     flipU: 0
@@ -2126,8 +2127,61 @@ ParticleSystem:
     inWorldSpace: 1
     randomizePerFrame: 0
   ExternalForcesModule:
+    serializedVersion: 2
     enabled: 0
-    multiplier: 1
+    multiplierCurve:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 1
+      minScalar: 1
+      maxCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      minCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     influenceFilter: 0
     influenceMask:
       serializedVersion: 2
@@ -4489,6 +4543,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4501,6 +4556,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4547,7 +4603,7 @@ GameObject:
   - component: {fileID: 3088440039542482705}
   - component: {fileID: 3072814573179782039}
   - component: {fileID: 3063203484528059079}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Chasis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4590,6 +4646,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4607,6 +4664,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4629,7 +4687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3088831377002436389}
   - component: {fileID: 3043158019471784073}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sedan
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -4675,7 +4733,7 @@ GameObject:
   - component: {fileID: 3088546457076262557}
   - component: {fileID: 3074680452262623791}
   - component: {fileID: 3062569388216449617}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4718,6 +4776,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4730,6 +4789,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4751,7 +4811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3081088011302116103}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelBL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4782,7 +4842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3081463344841167497}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4820,7 +4880,7 @@ GameObject:
   - component: {fileID: 3081093075642652369}
   - component: {fileID: 3072870084000365603}
   - component: {fileID: 3064627231646835959}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4863,6 +4923,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4875,6 +4936,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4896,7 +4958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3081247378170617061}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelBR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4929,7 +4991,7 @@ GameObject:
   - component: {fileID: 3081560307909414831}
   - component: {fileID: 3073420068061760045}
   - component: {fileID: 3063266410753889085}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4972,6 +5034,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4984,6 +5047,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5005,7 +5069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3088743427390928395}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelFR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5038,7 +5102,7 @@ GameObject:
   - component: {fileID: 3081479655783651953}
   - component: {fileID: 3072951146564144577}
   - component: {fileID: 3062470311044370405}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5081,6 +5145,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5093,6 +5158,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5114,7 +5180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3088800155695507959}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WheelFL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

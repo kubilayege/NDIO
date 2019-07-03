@@ -40,6 +40,7 @@ public class botCar : MonoBehaviour
         rb.MovePosition(transform.position + direction);
 
     }
+
     GameObject FindClosest(int thisID)
     {
         var maxdistance = 0.0f;
@@ -59,6 +60,7 @@ public class botCar : MonoBehaviour
 
         return closest;
     }
+
     int GetBotID(string name)
     {
         for (int i = 0; i < gc.bots.Length; i++)
@@ -67,6 +69,7 @@ public class botCar : MonoBehaviour
         }
         return -1;
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Shield")
@@ -76,8 +79,8 @@ public class botCar : MonoBehaviour
 
         if (other.gameObject.tag == "Car")
         {
+            KillSomeone(other.gameObject.transform.parent.gameObject);
             Destroy(other.gameObject.transform.parent.gameObject);
-            KillSomeone();
         }
 
 
@@ -88,10 +91,12 @@ public class botCar : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.AddForce(-transform.forward * knockbackcoff);
     }
-    void KillSomeone()
+
+    void KillSomeone(GameObject other)
     {
-        score += 1;
-        scaler.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
-        scaler2.gameObject.transform.localScale += new Vector3(0.5f, 0, 0);
+        gc.UpdateScore(this.name, gc.GetScore(other.name) + 10);
+        gc.scores[other.name] = 0;
+        scaler.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(1).localScale.x, 0, 0);
+        scaler2.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(2).localScale.x, 0, 0);
     }
 }
