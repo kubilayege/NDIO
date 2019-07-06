@@ -11,7 +11,7 @@ public class botCar : MonoBehaviour
     Vector3 direction; //yön bilgisi
 
     public int score;
-    public float knockbackcoff = 100.0f;
+    float knockbackcoff = 250.0f;
 
     void Start()
     {

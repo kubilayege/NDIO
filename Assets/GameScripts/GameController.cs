@@ -2,20 +2,29 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject[] carModels;
     public GameObject[] bots;
+    public GameObject[] carModels;
+    public Material[] carMaterials;
+    Material[] objmats;
 
-    public GameObject player;
+    public GameObject playerPreview;
     public GameObject playerPrefab;
+    public GameObject player;
 
     public GameObject shield;
     public GameObject shield2;
+    GameObject UI;
+    
+    string nicknameInput;
 
     public int numberOfBots;
-    public int chosenCar = 0;
+    int modelIdx;
+    int colorIdx;
 
     int offSet = 50;
     int tempOffset = 10;
@@ -27,8 +36,41 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        SpawnPlayer();
-        SpawnBots();
+        InitializeGame();
+    }
+
+    void InitializeGame()
+    {
+        UI = GameObject.FindGameObjectWithTag("UI");
+        playerPreview = spawnObj(carModels[0], new Vector3(0.0f, 0.1f, 0.0f), Quaternion.identity);
+        StartCoroutine(rotatePreview());
+    }
+
+    IEnumerator rotatePreview()
+    {
+        while(UI.activeInHierarchy != false)
+        {
+            playerPreview.transform.Rotate(0, 20 * Time.deltaTime, 0);
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
+
+    public void ChangePreviewCarColor()
+    {
+        colorIdx = (int)UI.transform.GetChild(3).gameObject.GetComponent<Slider>().value;
+        Material[] objmats = playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials;
+        objmats[1] = carMaterials[colorIdx];
+
+        playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials = objmats;
+
+    }
+
+    public void ChangePreviewCarModel()
+    {
+        modelIdx = (int)UI.transform.GetChild(2).gameObject.GetComponent<Slider>().value;
+        Destroy(playerPreview, 0.01f);
+        playerPreview = spawnObj(carModels[modelIdx], new Vector3(0.0f, 0.1f, 0.0f), playerPreview.transform.rotation);
     }
 
     void Update()
@@ -36,14 +78,29 @@ public class GameController : MonoBehaviour
 
     }
 
+
+    public void StartGame()
+    {
+        nicknameInput = UI.transform.GetChild(1).gameObject.GetComponent<InputField>().text;
+        UI.SetActive(false);
+        if (nicknameInput.Length > 2 )
+        {
+            Destroy(playerPreview);
+            InitScores();
+            SpawnPlayer();
+            SpawnBots();
+        }
+        
+    }
+
     void SpawnPlayer()
     {
         //player spawn
         player = spawnObj(playerPrefab, getRandPos(1), Quaternion.identity);
-        player.name = "player";
+        player.name = nicknameInput;
         SetScore(player.name, 0);
 
-        GameObject playerCar = spawnObj(carModels[chosenCar], player.transform.position, Quaternion.identity);
+        GameObject playerCar = spawnObj(playerPreview, player.transform.position, Quaternion.identity);
         playerCar.transform.parent = player.transform;
 
         playerCar = spawnObj(shield, new Vector3(player.transform.position.x,

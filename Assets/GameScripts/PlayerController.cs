@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     GameObject scaler;
     [SerializeField]
     GameObject scaler2;
-    float knockbackcoff = 100.0f;
+    float knockbackcoff = 250.0f;
     int score;
 
     
