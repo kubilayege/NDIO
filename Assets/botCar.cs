@@ -3,6 +3,7 @@
 public class botCar : MonoBehaviour
 {
     GameController gc;
+    [SerializeField]
     GameObject target;
     Rigidbody rb;
     GameObject scaler;
@@ -10,15 +11,23 @@ public class botCar : MonoBehaviour
     Vector3 direction; //yön bilgisi
 
     public int score;
-    public float knockbackcoff = 1000.0f;
+    public float knockbackcoff = 100.0f;
 
     void Start()
     {
+        InitializeVariables();
+    }
+
+    void InitializeVariables()
+    {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         rb = GetComponent<Rigidbody>();
-
-        scaler = transform.GetChild(1).gameObject;
-        scaler2 = transform.GetChild(2).gameObject;
+        
+        if (transform.GetChild(1) != null)
+        {
+            scaler = transform.GetChild(1).gameObject;
+            scaler2 = transform.GetChild(2).gameObject;
+        }
     }
 
     void Update()
@@ -31,7 +40,7 @@ public class botCar : MonoBehaviour
     {
         int id = GetBotID(this.name);
         target = FindClosest(id);
-        try { direction = (target.transform.position - transform.position).normalized * 7 * Time.deltaTime; } catch { }
+        try { direction = (target.transform.position - transform.position).normalized * gc.carSpeeds * Time.deltaTime; } catch { }
 
         transform.forward += new Vector3(Mathf.Lerp(transform.position.x, direction.x, 1.2f),
                                         0,
@@ -43,7 +52,7 @@ public class botCar : MonoBehaviour
 
     GameObject FindClosest(int thisID)
     {
-        var maxdistance = 0.0f;
+        var mindistance = 100.0f;
         var distance = 0.0f;
 
         GameObject closest = gc.player;
@@ -52,11 +61,11 @@ public class botCar : MonoBehaviour
         {
             if (i == thisID) { continue; }
             try { distance = (gc.bots[i].transform.position - gc.bots[thisID].transform.position).magnitude; } catch { }
-            if (distance > maxdistance) { maxdistance = distance; closest = gc.bots[i].gameObject; }
+            if (distance < mindistance) { mindistance = distance; closest = gc.bots[i].gameObject; }
         }
 
         try { distance = (gc.player.transform.position - gc.bots[thisID].transform.position).magnitude; } catch { }
-        if (distance > maxdistance) { return gc.player; }
+        if (distance < mindistance) { return gc.player; }
 
         return closest;
     }

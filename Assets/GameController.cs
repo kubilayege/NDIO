@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     int offSet = 50;
     int tempOffset = 10;
 
+    public float carSpeeds=10.0f;
+
     [SerializeField]
     public SortedDictionary<string, int> scores;
 
@@ -87,9 +89,9 @@ public class GameController : MonoBehaviour
     {
         //UnityEngine.Random.seed = DateTime.UtcNow.Millisecond;
         UnityEngine.Random.InitState(DateTime.UtcNow.Millisecond);
-        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-i * 5, i * 5),
+        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-i * 10, i * 10),
                                           1f,
-                                          UnityEngine.Random.Range(-i * 5, i * 5));
+                                          UnityEngine.Random.Range(-i * 10, i * 10));
 
         return randomPlace;
     }
@@ -138,14 +140,18 @@ public class GameController : MonoBehaviour
 
     private void OnGUI()
     {
-        var scoreBoard = scores.OrderByDescending(x => x.Value);
-
-        GUI.skin.label.fontSize = 40;
-        foreach( KeyValuePair<string, int> kvp in scoreBoard)
+        if(scores != null)
         {
-            GUI.Label(new Rect(Screen.width - 250, Screen.height - Screen.height + tempOffset, Screen.width, Screen.height), kvp.Key + " " + kvp.Value);
-            tempOffset += offSet;
+            var scoreBoard = scores.OrderByDescending(x => x.Value);
+
+            GUI.skin.label.fontSize = 40;
+            foreach (KeyValuePair<string, int> kvp in scoreBoard)
+            {
+                GUI.Label(new Rect(Screen.width - 250, Screen.height - Screen.height + tempOffset, Screen.width, Screen.height), kvp.Key + " " + kvp.Value);
+                tempOffset += offSet;
+            }
+            tempOffset = 10;
         }
-        tempOffset = 10;
-    }
+
+    }    
 }
