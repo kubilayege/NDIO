@@ -64,10 +64,6 @@ public class GameController : MonoBehaviour
     public void ChangePreviewCarColor()
     {
         colorIdx = (int)UI.transform.GetChild(3).gameObject.GetComponent<Slider>().value;
-        //Material[] objmats = playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials;
-        //objmats[1] = carMaterials[colorIdx];
-
-        //playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials = objmats;
         ChangeColor(playerPreview, carMaterials[colorIdx]);
     }
 
@@ -92,7 +88,6 @@ public class GameController : MonoBehaviour
         
         if (nicknameInput.Length > 1 && nicknameInput.Contains(" ") != true)
         {
-            //UI.SetActive(false);
             ToogleMainMenu(false);
             
             Destroy(playerPreview);
@@ -109,19 +104,10 @@ public class GameController : MonoBehaviour
     }
 
     public void Replay()
-    {
-       
-        for (int i = 0;  i < numberOfBots; i++)
-        {
-            if(bots[i] != null)
-            {
-                Destroy(bots[i].gameObject);
-                bots[i] = botPrefab;
-            }
-        }
-        
+    {        
         ToogleMainMenu(false);
-        StartGame();
+        InitScores();
+        SpawnPlayer();
     }
 
     void ToogleMainMenu(bool toogle)
@@ -159,10 +145,9 @@ public class GameController : MonoBehaviour
         playerCar.transform.parent = player.transform;
     }
 
-    void SpawnBots()
+    public void SpawnBot(int i)
     {
-        //bots spawn
-        for (int i = 0; i < numberOfBots; i++)
+        if(bots[i].name != ("Bot" + (i + 1).ToString()))
         {
             bots[i] = spawnObj(bots[i], getRandPos(i + 1), Quaternion.identity);
             GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
@@ -178,11 +163,30 @@ public class GameController : MonoBehaviour
                                                   bots[i].transform.position.y + 0.3f,
                                                   bots[i].transform.position.z + 1.3f), Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
-            
+
             bots[i].transform.forward = getRandPos(i + 1);
             bots[i].name = "Bot" + (i + 1).ToString();
             SetScore(bots[i].name, 0);
         }
+    }
+
+    void SpawnBots()
+    {
+        //bots spawn
+        for (int i = 0; i < numberOfBots; i++)
+        {
+            SpawnBot(i);
+        }
+    }
+
+
+    public int GetBotID(string name)
+    {
+        for (int i = 0; i < bots.Length; i++)
+        {
+            try { if (bots[i].name == name) return i; } catch { }
+        }
+        return -1;
     }
 
     Vector3 getRandPos(int i)

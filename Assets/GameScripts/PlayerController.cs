@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
     void KillSomeone(GameObject other)
     {
+        gc.SpawnBot(gc.GetBotID(other.name));
         gc.UpdateScore(this.name, gc.GetScore(other.name) + 10);
         gc.scores[other.name] = 0;
         scaler.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(1).localScale.x, 0, 0);
