@@ -146,35 +146,7 @@ public class GameController : MonoBehaviour
 
     public void SpawnBot(int i)
     {
-        try
-        {
-            //bots spawn
-            for (int i = 0; i < numberOfBots; i++)
-            {
-                bots[i] = spawnObj(bots[i], getRandPos(i + 1), Quaternion.identity);
-                GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
-                botCar.transform.parent = bots[i].transform;
-
-                //arabanın önüne shield spawn eder
-                botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
-                                                      bots[i].transform.position.y + 0.3f,
-                                                      bots[i].transform.position.z + 1.3f), Quaternion.identity);
-                botCar.transform.parent = bots[i].transform;
-
-                botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
-                                                      bots[i].transform.position.y + 0.3f,
-                                                      bots[i].transform.position.z + 1.3f), Quaternion.identity);
-                botCar.transform.parent = bots[i].transform;
-
-                bots[i].transform.forward = getRandPos(i + 1);
-                bots[i].name = "Bot" + (i + 1).ToString();
-                SetScore(bots[i].name, 0);
-            }
-        }
-        catch
-        {
-
-        if(bots[i].name != ("Bot" + (i + 1).ToString()))
+        if (bots[i].name != ("Bot" + (i + 1).ToString()))
         {
             bots[i] = spawnObj(bots[i], getRandPos(i + 1), Quaternion.identity);
             GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
@@ -182,20 +154,19 @@ public class GameController : MonoBehaviour
 
             //arabanın önüne shield spawn eder
             botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
-                                                  bots[i].transform.position.y + 0.3f,
-                                                  bots[i].transform.position.z + 1.3f), Quaternion.identity);
+                                                    bots[i].transform.position.y + 0.3f,
+                                                    bots[i].transform.position.z + 1.3f), Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
 
             botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
-                                                  bots[i].transform.position.y + 0.3f,
-                                                  bots[i].transform.position.z + 1.3f), Quaternion.identity);
+                                                    bots[i].transform.position.y + 0.3f,
+                                                    bots[i].transform.position.z + 1.3f), Quaternion.identity);
             botCar.transform.parent = bots[i].transform;
 
             bots[i].transform.forward = getRandPos(i + 1);
             bots[i].name = "Bot" + (i + 1).ToString();
             SetScore(bots[i].name, 0);
         }
-        
     }
 
     void SpawnBots()
