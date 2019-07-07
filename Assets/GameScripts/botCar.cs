@@ -35,12 +35,11 @@ public class botCar : MonoBehaviour
         Move();
     }
 
-
     void Move()
     {
         rb = GetComponent<Rigidbody>();
 
-        int id = GetBotID(this.name);
+        int id = gc.GetBotID(this.name);
         target = FindClosest(id);
         try { direction = (target.transform.position - transform.position).normalized * gc.carSpeeds * Time.deltaTime; } catch { }
 
@@ -72,15 +71,6 @@ public class botCar : MonoBehaviour
         return closest;
     }
 
-    int GetBotID(string name)
-    {
-        for (int i = 0; i < gc.bots.Length; i++)
-        {
-            try { if (gc.bots[i].name == name) return i; } catch { }
-        }
-        return -1;
-    }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Shield")
@@ -94,7 +84,6 @@ public class botCar : MonoBehaviour
             Destroy(other.gameObject.transform.parent.gameObject);
         }
 
-
     }
 
     void KnockBack()
@@ -107,9 +96,10 @@ public class botCar : MonoBehaviour
     void KillSomeone(GameObject other)
     {
         if (other.name == gc.nicknameInput) { gc.PlayerDead(gc.GetScore(other.name)); Debug.Log("I killed Player"); }
+        else { gc.SpawnBot(gc.GetBotID(other.name)); }
         gc.UpdateScore(this.name, gc.GetScore(other.name) + 10);
         gc.scores[other.name] = 0;
-        scaler.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(1).localScale.x, 0, 0);
-        scaler2.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(2).localScale.x, 0, 0);
+        scaler.gameObject.transform.localScale += new Vector3( other.transform.GetChild(1).localScale.x/8 , 0, 0);
+        scaler2.gameObject.transform.localScale += new Vector3( other.transform.GetChild(2).localScale.x/8 , 0, 0);
     }
 }
