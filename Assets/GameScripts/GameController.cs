@@ -20,7 +20,9 @@ public class GameController : MonoBehaviour
     public GameObject shield;
     public GameObject shield2;
     GameObject UI;
+    public GameObject Area;
     
+
     public string nicknameInput;
 
     public int numberOfBots;
@@ -127,13 +129,10 @@ public class GameController : MonoBehaviour
     void ToogleMainMenu(bool toogle)
     {
         UI.SetActive(toogle);
-        UI.transform.GetChild(0).gameObject.SetActive(!toogle);
-        UI.transform.GetChild(1).gameObject.SetActive(!toogle);
-        UI.transform.GetChild(2).gameObject.SetActive(!toogle);
-        UI.transform.GetChild(3).gameObject.SetActive(!toogle);
-
-        UI.transform.GetChild(4).gameObject.SetActive(toogle);
-        UI.transform.GetChild(5).gameObject.SetActive(toogle);
+        for (int i = 0; i < 6; i++)
+        {
+            UI.transform.GetChild(i).gameObject.SetActive(!toogle);
+        }
     }
 
     void SpawnPlayer()
@@ -161,37 +160,47 @@ public class GameController : MonoBehaviour
 
     void SpawnBots()
     {
-        //bots spawn
-        for (int i = 0; i < numberOfBots; i++)
+        try
         {
-            bots[i] = spawnObj(bots[i], getRandPos(i + 1), Quaternion.identity);
-            GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
-            botCar.transform.parent = bots[i].transform;
+            //bots spawn
+            for (int i = 0; i < numberOfBots; i++)
+            {
+                bots[i] = spawnObj(bots[i], getRandPos(i + 1), Quaternion.identity);
+                GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
+                botCar.transform.parent = bots[i].transform;
 
-            //arabanın önüne shield spawn eder
-            botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
-                                                  bots[i].transform.position.y + 0.3f,
-                                                  bots[i].transform.position.z + 1.3f), Quaternion.identity);
-            botCar.transform.parent = bots[i].transform;
+                //arabanın önüne shield spawn eder
+                botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
+                                                      bots[i].transform.position.y + 0.3f,
+                                                      bots[i].transform.position.z + 1.3f), Quaternion.identity);
+                botCar.transform.parent = bots[i].transform;
 
-            botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
-                                                  bots[i].transform.position.y + 0.3f,
-                                                  bots[i].transform.position.z + 1.3f), Quaternion.identity);
-            botCar.transform.parent = bots[i].transform;
-            
-            bots[i].transform.forward = getRandPos(i + 1);
-            bots[i].name = "Bot" + (i + 1).ToString();
-            SetScore(bots[i].name, 0);
+                botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
+                                                      bots[i].transform.position.y + 0.3f,
+                                                      bots[i].transform.position.z + 1.3f), Quaternion.identity);
+                botCar.transform.parent = bots[i].transform;
+
+                bots[i].transform.forward = getRandPos(i + 1);
+                bots[i].name = "Bot" + (i + 1).ToString();
+                SetScore(bots[i].name, 0);
+            }
         }
+        catch
+        {
+
+        }
+        
     }
 
     Vector3 getRandPos(int i)
     {
+       
         //UnityEngine.Random.seed = DateTime.UtcNow.Millisecond;
         UnityEngine.Random.InitState(DateTime.UtcNow.Millisecond);
-        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-i * 10, i * 10),
+        Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-Area.transform.localScale.x/2.1f ,  Area.transform.localScale.x/2.1f),
                                           1f,
-                                          UnityEngine.Random.Range(-i * 10, i * 10));
+                                          UnityEngine.Random.Range(-Area.transform.localScale.x/2.1f ,  Area.transform.localScale.x/2.1f ));
+        Debug.Log("value =? " + randomPlace);
 
         return randomPlace;
     }
