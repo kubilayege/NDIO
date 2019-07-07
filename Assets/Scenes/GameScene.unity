@@ -1079,7 +1079,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 10, y: -288}
+=======
+  m_AnchoredPosition: {x: 7, y: -317}
+>>>>>>> parent of 7dd3ed9... tag
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1288603889
@@ -1379,7 +1383,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 6.9999924, y: 331}
+=======
+  m_AnchoredPosition: {x: 6.9999924, y: -434}
+>>>>>>> parent of 7dd3ed9... tag
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440100945
@@ -2104,11 +2112,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4076265552829177428, guid: 5e979a9656769be4aa85b21ff573a91b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 7224692693981600559, guid: 5e979a9656769be4aa85b21ff573a91b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2312,11 +2315,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4076265552829177428, guid: 5e979a9656769be4aa85b21ff573a91b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 7224692693981600559, guid: 5e979a9656769be4aa85b21ff573a91b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2481,11 +2479,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4076265552829177428, guid: 5e979a9656769be4aa85b21ff573a91b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 7224692693981600559, guid: 5e979a9656769be4aa85b21ff573a91b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2574,11 +2567,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 4076265552829177428, guid: 5e979a9656769be4aa85b21ff573a91b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 7224692693981600559, guid: 5e979a9656769be4aa85b21ff573a91b,
         type: 3}
