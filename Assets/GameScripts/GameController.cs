@@ -115,10 +115,14 @@ public class GameController : MonoBehaviour
     void ToogleMainMenu(bool toogle)
     {
         UI.SetActive(toogle);
-        for (int i = 0; i < 6; i++)
-        {
-            UI.transform.GetChild(i).gameObject.SetActive(!toogle);
-        }
+        
+            UI.transform.GetChild(0).gameObject.SetActive(!toogle);
+            UI.transform.GetChild(1).gameObject.SetActive(!toogle);
+            UI.transform.GetChild(2).gameObject.SetActive(!toogle);
+            UI.transform.GetChild(3).gameObject.SetActive(!toogle);
+
+            UI.transform.GetChild(4).gameObject.SetActive(toogle);
+            UI.transform.GetChild(5).gameObject.SetActive(toogle);
     }
 
     void SpawnPlayer()
