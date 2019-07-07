@@ -21,10 +21,10 @@ public class botCar : MonoBehaviour
     void InitializeVariables()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        rb = GetComponent<Rigidbody>();
         
         if (transform.GetChild(1) != null)
         {
+            Debug.Log(this.name);
             scaler = transform.GetChild(1).gameObject;
             scaler2 = transform.GetChild(2).gameObject;
         }
@@ -38,6 +38,8 @@ public class botCar : MonoBehaviour
 
     void Move()
     {
+        rb = GetComponent<Rigidbody>();
+
         int id = GetBotID(this.name);
         target = FindClosest(id);
         try { direction = (target.transform.position - transform.position).normalized * gc.carSpeeds * Time.deltaTime; } catch { }
@@ -52,7 +54,7 @@ public class botCar : MonoBehaviour
 
     GameObject FindClosest(int thisID)
     {
-        var mindistance = 100.0f;
+        var mindistance = 200.0f;
         var distance = 0.0f;
 
         GameObject closest = gc.player;
@@ -60,11 +62,11 @@ public class botCar : MonoBehaviour
         for (int i = 0; i < gc.bots.Length; i++)
         {
             if (i == thisID) { continue; }
-            try { distance = (gc.bots[i].transform.position - gc.bots[thisID].transform.position).magnitude; } catch { }
+            if (gc.bots[i] != null) { distance = (gc.bots[i].transform.position - gc.bots[thisID].transform.position).magnitude; } 
             if (distance < mindistance) { mindistance = distance; closest = gc.bots[i].gameObject; }
         }
 
-        try { distance = (gc.player.transform.position - gc.bots[thisID].transform.position).magnitude; } catch { }
+        if (gc.player != null && gc.bots[thisID] != null) { distance = (gc.player.transform.position - gc.bots[thisID].transform.position).magnitude; } 
         if (distance < mindistance) { return gc.player; }
 
         return closest;
@@ -97,12 +99,14 @@ public class botCar : MonoBehaviour
 
     void KnockBack()
     {
+        rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(-transform.forward * knockbackcoff);
     }
 
     void KillSomeone(GameObject other)
     {
+        if (other.name == gc.nicknameInput) { gc.PlayerDead(gc.GetScore(other.name)); Debug.Log("I killed Player"); }
         gc.UpdateScore(this.name, gc.GetScore(other.name) + 10);
         gc.scores[other.name] = 0;
         scaler.gameObject.transform.localScale += new Vector3(0.5f + other.transform.GetChild(1).localScale.x, 0, 0);

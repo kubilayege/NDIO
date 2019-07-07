@@ -14,13 +14,14 @@ public class GameController : MonoBehaviour
 
     public GameObject playerPreview;
     public GameObject playerPrefab;
+    public GameObject botPrefab;
     public GameObject player;
 
     public GameObject shield;
     public GameObject shield2;
     GameObject UI;
     
-    string nicknameInput;
+    public string nicknameInput;
 
     public int numberOfBots;
     int modelIdx;
@@ -37,6 +38,10 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         InitializeGame();
+    }
+    void Update()
+    {
+
     }
 
     void InitializeGame()
@@ -59,11 +64,19 @@ public class GameController : MonoBehaviour
     public void ChangePreviewCarColor()
     {
         colorIdx = (int)UI.transform.GetChild(3).gameObject.GetComponent<Slider>().value;
-        Material[] objmats = playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials;
-        objmats[1] = carMaterials[colorIdx];
+        //Material[] objmats = playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials;
+        //objmats[1] = carMaterials[colorIdx];
 
-        playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials = objmats;
+        //playerPreview.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials = objmats;
+        ChangeColor(playerPreview, carMaterials[colorIdx]);
+    }
 
+    void ChangeColor(GameObject car, Material newMaterial)
+    {
+        Material[] objmats = car.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials;
+        objmats[1] = newMaterial;
+
+        car.transform.GetChild(0).GetChild(0).gameObject.GetComponent<MeshRenderer>().materials = objmats;
     }
 
     public void ChangePreviewCarModel()
@@ -73,25 +86,54 @@ public class GameController : MonoBehaviour
         playerPreview = spawnObj(carModels[modelIdx], new Vector3(0.0f, 0.1f, 0.0f), playerPreview.transform.rotation);
     }
 
-    void Update()
-    {
-
-    }
-
-
     public void StartGame()
     {
         nicknameInput = UI.transform.GetChild(1).gameObject.GetComponent<InputField>().text;
         
-        if (nicknameInput.Length > 2 )
+        if (nicknameInput.Length > 1 && nicknameInput.Contains(" ") != true)
         {
-            UI.SetActive(false);
+            //UI.SetActive(false);
+            ToogleMainMenu(false);
+            
             Destroy(playerPreview);
             InitScores();
             SpawnPlayer();
             SpawnBots();
         }
+    }
+
+    public void PlayerDead(int score)
+    {
+        ToogleMainMenu(true);
+        UI.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Score\n" + score.ToString() ;
+    }
+
+    public void Replay()
+    {
+       
+        for (int i = 0;  i < numberOfBots; i++)
+        {
+            if(bots[i] != null)
+            {
+                Destroy(bots[i].gameObject);
+                bots[i] = botPrefab;
+            }
+        }
         
+        ToogleMainMenu(false);
+        StartGame();
+    }
+
+    void ToogleMainMenu(bool toogle)
+    {
+        UI.SetActive(toogle);
+        UI.transform.GetChild(0).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(1).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(2).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(3).gameObject.SetActive(!toogle);
+
+        UI.transform.GetChild(4).gameObject.SetActive(toogle);
+        UI.transform.GetChild(5).gameObject.SetActive(toogle);
     }
 
     void SpawnPlayer()
@@ -101,8 +143,9 @@ public class GameController : MonoBehaviour
         player.name = nicknameInput;
         SetScore(player.name, 0);
 
-        GameObject playerCar = spawnObj(playerPreview, player.transform.position, Quaternion.identity);
+        GameObject playerCar = spawnObj(carModels[modelIdx], player.transform.position, Quaternion.identity);
         playerCar.transform.parent = player.transform;
+        ChangeColor(playerCar, carMaterials[colorIdx]);
 
         playerCar = spawnObj(shield, new Vector3(player.transform.position.x,
                                                 player.transform.position.y + 0.3f,
@@ -114,7 +157,6 @@ public class GameController : MonoBehaviour
                                                player.transform.position.y + 0.3f,
                                                player.transform.position.z + 1.3f), Quaternion.identity);
         playerCar.transform.parent = player.transform;
-
     }
 
     void SpawnBots()
