@@ -82,9 +82,10 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         nicknameInput = UI.transform.GetChild(1).gameObject.GetComponent<InputField>().text;
-        UI.SetActive(false);
+        
         if (nicknameInput.Length > 2 )
         {
+            UI.SetActive(false);
             Destroy(playerPreview);
             InitScores();
             SpawnPlayer();

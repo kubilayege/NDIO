@@ -323,17 +323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d966d247c6af8e14396e5d7ad5105c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carModels:
-  - {fileID: 261943132681320116, guid: ce5842b67d3877242af75a6ccb4b854b, type: 3}
-  - {fileID: 7720703220109032931, guid: cebc41507ef9e3d449b60dfdc2fc5fce, type: 3}
-  - {fileID: 2192345978566690411, guid: 84299443c568cc2469caafb77ae27034, type: 3}
-  - {fileID: 4236619441801604459, guid: ac0cec6b5f915fe449317a556072b610, type: 3}
-  - {fileID: 4142593459806264154, guid: fb8b31cdc9f52644e9fcd34290e2e57b, type: 3}
-  - {fileID: 3085190434522946287, guid: a3935e15f03f1bf43aa5820d2b42235c, type: 3}
-  - {fileID: 3779511710734713662, guid: 9a73a844bbfc84c4ca3edd706303f9d7, type: 3}
-  - {fileID: 6363778693659457807, guid: 2ee268e0df09fc54c9be43314aba2243, type: 3}
-  - {fileID: 2096333210466334907, guid: bc17c8f25f299184dbb0946fba127abf, type: 3}
-  carMaterials: []
   bots:
   - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
   - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
@@ -345,6 +334,24 @@ MonoBehaviour:
   - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
   - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
   - {fileID: 3176006581851418617, guid: dcaaa0869ad15784b886f21cdc6af207, type: 3}
+  carModels:
+  - {fileID: 261943132681320116, guid: ce5842b67d3877242af75a6ccb4b854b, type: 3}
+  - {fileID: 7720703220109032931, guid: cebc41507ef9e3d449b60dfdc2fc5fce, type: 3}
+  - {fileID: 2192345978566690411, guid: 84299443c568cc2469caafb77ae27034, type: 3}
+  - {fileID: 4236619441801604459, guid: ac0cec6b5f915fe449317a556072b610, type: 3}
+  - {fileID: 4142593459806264154, guid: fb8b31cdc9f52644e9fcd34290e2e57b, type: 3}
+  - {fileID: 3085190434522946287, guid: a3935e15f03f1bf43aa5820d2b42235c, type: 3}
+  - {fileID: 3779511710734713662, guid: 9a73a844bbfc84c4ca3edd706303f9d7, type: 3}
+  - {fileID: 6363778693659457807, guid: 2ee268e0df09fc54c9be43314aba2243, type: 3}
+  - {fileID: 2096333210466334907, guid: bc17c8f25f299184dbb0946fba127abf, type: 3}
+  carMaterials:
+  - {fileID: 2100000, guid: 176f9c5d31c9a24498098a2fb3aee121, type: 2}
+  - {fileID: 2100000, guid: ddbf5a141ab72d74b8ec0cba928192ae, type: 2}
+  - {fileID: 2100000, guid: fc33ad45fb25519448ceef2aeb8d767c, type: 2}
+  - {fileID: 2100000, guid: 91071ae63af921442a7a26ce4e7be2ad, type: 2}
+  - {fileID: 2100000, guid: 597c60ce66e8369408c0f58ec2ea404b, type: 2}
+  - {fileID: 2100000, guid: 710db5a8d0e64ca44bcbf0c9aa0963be, type: 2}
+  - {fileID: 2100000, guid: 351fa53eb76ebc5469ca5d0a876ccec3, type: 2}
   playerPreview: {fileID: 0}
   playerPrefab: {fileID: 9163663252292211920, guid: 3045aa7b6f34cdb4e97dffe251b5645b,
     type: 3}
@@ -352,7 +359,6 @@ MonoBehaviour:
   shield: {fileID: 2258211896860177063, guid: 6667740d9be493e4687502e9b9262021, type: 3}
   shield2: {fileID: 1011190556949743038, guid: 291e1ca069a7896428577cabbe928c99, type: 3}
   numberOfBots: 10
-  chosenCar: 8
   carSpeeds: 10
 --- !u!4 &706823188
 Transform:
@@ -1624,7 +1630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.00001}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -188.3, y: 91.4}
+  m_AnchoredPosition: {x: -151.97, y: 91.4}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1863574428
@@ -1676,7 +1682,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 706823187}
+        m_MethodName: ChangePreviewCarColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1877454564
@@ -1844,7 +1861,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 706823187}
-        m_MethodName: ChangePreviewCar
+        m_MethodName: ChangePreviewCarModel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
