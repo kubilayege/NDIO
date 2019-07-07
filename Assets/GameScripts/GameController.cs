@@ -103,6 +103,9 @@ public class GameController : MonoBehaviour
     {
         ToogleMainMenu(true);
         UI.transform.GetChild(5).gameObject.GetComponent<Text>().text = "Score\n" + score.ToString() ;
+
+        scores[player.name] = 0;
+        Destroy(player.gameObject);
     }
 
     public void Replay()
@@ -116,19 +119,19 @@ public class GameController : MonoBehaviour
     {
         UI.SetActive(toogle);
         
-            UI.transform.GetChild(0).gameObject.SetActive(!toogle);
-            UI.transform.GetChild(1).gameObject.SetActive(!toogle);
-            UI.transform.GetChild(2).gameObject.SetActive(!toogle);
-            UI.transform.GetChild(3).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(0).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(1).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(2).gameObject.SetActive(!toogle);
+        UI.transform.GetChild(3).gameObject.SetActive(!toogle);
 
-            UI.transform.GetChild(4).gameObject.SetActive(toogle);
-            UI.transform.GetChild(5).gameObject.SetActive(toogle);
+        UI.transform.GetChild(4).gameObject.SetActive(toogle);
+        UI.transform.GetChild(5).gameObject.SetActive(toogle);
     }
 
     void SpawnPlayer()
     {
         //player spawn
-        player = spawnObj(playerPrefab, getRandPos(1), Quaternion.identity);
+        player = spawnObj(playerPrefab, getRandPos(), Quaternion.identity);
         player.name = nicknameInput;
         SetScore(player.name, 0);
 
@@ -148,29 +151,37 @@ public class GameController : MonoBehaviour
         playerCar.transform.parent = player.transform;
     }
 
+    public void ReSpawnBot(int i)
+    {
+        bots[i].transform.GetChild(1).localScale = new Vector3(1, 0.4f, 0.4f);
+        bots[i].transform.GetChild(2).localScale = new Vector3(1, 0.4f, 0.4f);
+
+
+        bots[i].transform.position = getRandPos();
+
+        scores[bots[i].name] = 0;
+    }
+
     public void SpawnBot(int i)
     {
-        if (bots[i].name != ("Bot" + (i + 1).ToString()))
-        {
-            bots[i] = spawnObj(bots[i], getRandPos(i + 1), Quaternion.identity);
-            GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
-            botCar.transform.parent = bots[i].transform;
+        bots[i] = spawnObj(botPrefab, getRandPos(), Quaternion.identity);
+        GameObject botCar = spawnObj(carModels[(int)UnityEngine.Random.Range(0, 8)], bots[i].transform.position, Quaternion.identity);
+        botCar.transform.parent = bots[i].transform;
 
-            //arabanın önüne shield spawn eder
-            botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
-                                                    bots[i].transform.position.y + 0.3f,
-                                                    bots[i].transform.position.z + 1.3f), Quaternion.identity);
-            botCar.transform.parent = bots[i].transform;
+        //arabanın önüne shield spawn eder
+        botCar = spawnObj(shield, new Vector3(bots[i].transform.position.x,
+                                                bots[i].transform.position.y + 0.3f,
+                                                bots[i].transform.position.z + 1.3f), Quaternion.identity);
+        botCar.transform.parent = bots[i].transform;
 
-            botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
-                                                    bots[i].transform.position.y + 0.3f,
-                                                    bots[i].transform.position.z + 1.3f), Quaternion.identity);
-            botCar.transform.parent = bots[i].transform;
+        botCar = spawnObj(shield2, new Vector3(bots[i].transform.position.x,
+                                                bots[i].transform.position.y + 0.3f,
+                                                bots[i].transform.position.z + 1.3f), Quaternion.identity);
+        botCar.transform.parent = bots[i].transform;
 
-            bots[i].transform.forward = getRandPos(i + 1);
-            bots[i].name = "Bot" + (i + 1).ToString();
-            SetScore(bots[i].name, 0);
-        }
+        bots[i].transform.forward = getRandPos();
+        bots[i].name = "Bot" + (i + 1).ToString();
+        SetScore(bots[i].name, 0);
     }
 
     void SpawnBots()
@@ -192,7 +203,7 @@ public class GameController : MonoBehaviour
         return -1;
     }
 
-    Vector3 getRandPos(int i)
+    Vector3 getRandPos()
     {
        
         //UnityEngine.Random.seed = DateTime.UtcNow.Millisecond;

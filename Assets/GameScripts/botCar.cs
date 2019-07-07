@@ -81,7 +81,6 @@ public class botCar : MonoBehaviour
         if (other.gameObject.tag == "Car")
         {
             KillSomeone(other.gameObject.transform.parent.gameObject);
-            Destroy(other.gameObject.transform.parent.gameObject);
         }
 
     }
@@ -95,10 +94,11 @@ public class botCar : MonoBehaviour
 
     void KillSomeone(GameObject other)
     {
-        if (other.name == gc.nicknameInput) { gc.PlayerDead(gc.GetScore(other.name)); Debug.Log("I killed Player"); }
-        else { gc.SpawnBot(gc.GetBotID(other.name)); }
         gc.UpdateScore(this.name, gc.GetScore(other.name) + 10);
-        gc.scores[other.name] = 0;
+
+        if (other.name == gc.nicknameInput) { gc.PlayerDead(gc.GetScore(other.name)); Debug.Log("I killed Player"); }
+        else { gc.ReSpawnBot(gc.GetBotID(other.name)); }
+
         scaler.gameObject.transform.localScale += new Vector3( other.transform.GetChild(1).localScale.x/8 , 0, 0);
         scaler2.gameObject.transform.localScale += new Vector3( other.transform.GetChild(2).localScale.x/8 , 0, 0);
     }
