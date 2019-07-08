@@ -166,7 +166,7 @@ public class GameController : MonoBehaviour
 
         bots[i].transform.position = getRandPos();
 
-        scores[bots[i].name] = 0;
+        SetScore(bots[i].name, 0);
     }
 
     public void SpawnBot(int i)

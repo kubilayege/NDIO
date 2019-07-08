@@ -99,7 +99,7 @@ public class botCar : MonoBehaviour
         if (other.name == gc.nicknameInput) { gc.PlayerDead(gc.GetScore(other.name)); Debug.Log("I killed Player"); }
         else { gc.ReSpawnBot(gc.GetBotID(other.name)); }
 
-        scaler.gameObject.transform.localScale += new Vector3( other.transform.GetChild(1).localScale.x/8 , 0, 0);
-        scaler2.gameObject.transform.localScale += new Vector3( other.transform.GetChild(2).localScale.x/8 , 0, 0);
+        scaler.gameObject.transform.localScale += new Vector3(0.5f+ other.transform.GetChild(1).localScale.x/8 , 0, 0);
+        scaler2.gameObject.transform.localScale += new Vector3(0.5f+ other.transform.GetChild(2).localScale.x/8 , 0, 0);
     }
 }
