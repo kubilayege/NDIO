@@ -21,8 +21,9 @@ public class GameController : MonoBehaviour
     public GameObject shield2;
     GameObject UI;
     public GameObject Area;
-    
 
+    string path;
+    string[] lines;
     public string nicknameInput;
 
     public int numberOfBots;
@@ -49,8 +50,14 @@ public class GameController : MonoBehaviour
     void InitializeGame()
     {
         UI = GameObject.FindGameObjectWithTag("UI");
+
         playerPreview = spawnObj(carModels[0], new Vector3(0.0f, 0.1f, 0.0f), Quaternion.identity);
         StartCoroutine(rotatePreview());
+
+        path = Application.dataPath + "/GameScripts/nicknames.txt";
+        System.IO.FileInfo fileNames = new System.IO.FileInfo(path);
+        System.IO.StreamReader readerNames = fileNames.OpenText();
+        lines = System.IO.File.ReadAllLines(path);
     }
 
     IEnumerator rotatePreview()
@@ -180,7 +187,7 @@ public class GameController : MonoBehaviour
         botCar.transform.parent = bots[i].transform;
 
         bots[i].transform.forward = getRandPos();
-        bots[i].name = "Bot" + (i + 1).ToString();
+        bots[i].name = GetRandomName();
         SetScore(bots[i].name, 0);
     }
 
@@ -202,6 +209,17 @@ public class GameController : MonoBehaviour
         }
         return -1;
     }
+    string GetRandomName()
+    {
+        string name = lines[UnityEngine.Random.Range(0, lines.Length)];
+
+        while (scores.ContainsKey(name))
+        {
+            name = lines[UnityEngine.Random.Range(0, lines.Length)];
+        }
+
+        return name;
+    }
 
     Vector3 getRandPos()
     {
@@ -211,7 +229,7 @@ public class GameController : MonoBehaviour
         Vector3 randomPlace = new Vector3(UnityEngine.Random.Range(-Area.transform.localScale.x/2.1f ,  Area.transform.localScale.x/2.1f),
                                           1f,
                                           UnityEngine.Random.Range(-Area.transform.localScale.x/2.1f ,  Area.transform.localScale.x/2.1f ));
-        Debug.Log("value =? " + randomPlace);
+        //Debug.Log("value =? " + randomPlace);
 
         return randomPlace;
     }
@@ -263,7 +281,7 @@ public class GameController : MonoBehaviour
         if(scores != null)
         {
             var scoreBoard = scores.OrderByDescending(x => x.Value);
-
+            
             GUI.skin.label.fontSize = 40;
             foreach (KeyValuePair<string, int> kvp in scoreBoard)
             {
